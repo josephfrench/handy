@@ -1,3 +1,3 @@
 # Utils
 
-Pipeable functions that provide convinient shorthand for common expressions within an .pipe() chain
+Pipeable functions that provide convinient shorthand for common expressions within an .pipe() chain among other handy utils.
