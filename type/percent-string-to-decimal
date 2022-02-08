@@ -1,0 +1,11 @@
+export const percentStringToDecimal = (s: any, fractionDigits = 4) => {
+  if (isNaN(s)) {
+    return NaN;
+  }
+
+  if (+s === 0) {
+    return 0;
+  }
+
+  return (+s / 100.0).toFixed(fractionDigits);
+};
