@@ -10,6 +10,6 @@
 * 
 * Replaces: ... tap(a => console.log(a)) ...
 */
-export const logIt  = (label: string | number = '') => pipe(
+export const log  = (label: string | number = '') => pipe(
    tap((value) => console.log(label, value))
 );
