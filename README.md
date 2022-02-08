@@ -1,3 +1,3 @@
 # Utils
 
-Pipeable functions that provide convinient shorthand for common expressions within an .pipe() chain among other handy utils.
+Handy TS utils for primitives, arrays, objects, ng reactive forms, case_Ing, rxjs observables, etc.
