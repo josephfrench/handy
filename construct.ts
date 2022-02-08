@@ -3,11 +3,13 @@ import {OperatorFunction, pipe} from 'rxjs';
 
 /***
 * Use within .rxjs pipe() chain to call constructor of passed Class type param with passed value as constructor arg
-*     eg:
-*     myObs.pipe(construct(MyClass))
 *
-*     in lieu of:
-*     myObs.pipe(map(value => new MyClass(value)))
+* Example usage: 
+*     myObservable.pipe(
+*        construct(MyClass)
+*     )
+* 
+* Replaces: ... map(value => new MyClass(value))) ...
 ***/
 
 export const contruct = <T extends new (...args: any[]) => InstanceType<T>>(classRef: T): OperatorFunction<T | T[], any> => pipe(
