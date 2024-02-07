@@ -1,7 +1,7 @@
 function curlToAxios(curlCommand) {
   // Basic parsing (assumes a well-formed curl command)
   const methodMatch = curlCommand.match(/-X\s(\w+)/);
-  const urlMatch = curlCommand.match(/"([^"]+)"/); // Simple match; might need refinement
+  const urlMatch = curlCommand.match(/curl\s+-X\s+\w+\s+(.+)/);
   const headerMatches = [...curlCommand.matchAll(/-H\s"([^"]+)"/g)];
   const dataMatch = curlCommand.match(/--data-raw\s'([^']+)'/) || curlCommand.match(/-d\s'([^']+)'/);
 
