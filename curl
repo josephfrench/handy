@@ -1,0 +1,38 @@
+function curlToAxios(curlCommand) {
+  // Basic parsing (assumes a well-formed curl command)
+  const methodMatch = curlCommand.match(/-X\s(\w+)/);
+  const urlMatch = curlCommand.match(/"([^"]+)"/); // Simple match; might need refinement
+  const headerMatches = [...curlCommand.matchAll(/-H\s"([^"]+)"/g)];
+  const dataMatch = curlCommand.match(/--data-raw\s'([^']+)'/) || curlCommand.match(/-d\s'([^']+)'/);
+
+  const method = methodMatch ? methodMatch[1] : 'GET';
+  const url = urlMatch ? urlMatch[1] : '';
+  const headers = headerMatches.reduce((acc, match) => {
+    const [key, value] = match[1].split(': ').map(s => s.trim());
+    acc[key] = value;
+    return acc;
+  }, {});
+  const data = dataMatch ? JSON.parse(dataMatch[1]) : undefined;
+
+  // Construct Axios request config
+  const axiosConfig = {
+    method: method.toLowerCase(),
+    url,
+    headers,
+  };
+
+  if (data) {
+    axiosConfig.data = data;
+  }
+
+  return axiosConfig;
+}
+
+// Example usage
+const curlCommand = `curl -X POST "http://example.com/api/endpoint" -H "Content-Type: application/json" -H "Authorization: Bearer your_token_here" -d '{"key":"value"}'`;
+const axiosConfig = curlToAxios(curlCommand);
+
+console.log("Axios Config:", axiosConfig);
+
+// You can then use axiosConfig with axios
+// axios(axiosConfig).then(response => console.log(response.data)).catch(error => console.error(error));
